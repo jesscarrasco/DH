@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <title>Dog Hero - Single Page Application</title>
 
-    <link href="https://doghero-assets.s3.amazonaws.com/assets/favicons/favicon-fa5fb295a0241d44533b0b0063e9be1e.ico' rel='shortcut icon" />
+    
+    <link href="https://doghero-assets.s3.amazonaws.com/assets/favicons/favicon-fa5fb295a0241d44533b0b0063e9be1e.ico" rel="shortcut icon" />
+    <link rel="stylesheet" type="text/css" href="css/default.css" />
     
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-route.min.js"></script>    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-resource.min.js"></script>    
     
-    <script src="scripts/routes.js"></script>
-    <script src="scripts/api_connection.js"></script>
+    <script src="scripts/script.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="css/default.css" />
 </head>
 <body ng-app="single-page-app">
     <div ng-controller="cfgController" id="content">
@@ -28,21 +29,26 @@
             </div>
 
 
-            <form>
+            <form ng-submit="getResults()">
                 <fieldset class="center">
                     <label>Palavra-chave ou hastag:</label>
-                    <input type="text" max-chars="40" placeholder="Sugestões: #dogs, #pets, filhotes de cachorro" />
+                    <input type="text" max-chars="40" placeholder="Sugestões: #dogs, #pets, filhotes de cachorro" ng-model="hashtag" spellcheck="false" value="{{hashtag}}"
+
+                    />
                     <button>Buscar e Combinar</button>
                 </fieldset>
             </form>
-            
 
-            <div ng-view>
-            <!--
-            This DIV loads templates depending upon route.
-            -->
-            </div>
-        </div
->    </div>
+            <ul class="center">
+                <li ng-repeat="searchItem in searchResults">
+                    <img ng-src="{{searchItem.photo}}" alt="Imagem do Flickr" />
+
+                    <p>
+                        {{searchItem.tweet}}
+                    </p>
+                </li>   
+            </ul>       
+        </div>
+    </div>
 </body>
 </html> 
